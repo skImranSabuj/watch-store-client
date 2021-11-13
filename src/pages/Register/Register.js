@@ -1,25 +1,15 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
-import { Link, NavLink } from 'react-router-dom';
-import useWatches from '../../hooks/useWatches';
+import { NavLink } from 'react-router-dom';
 import './Register.css';
-// import * as yup from "yup";
-import { Button, ButtonGroup, Form } from "react-bootstrap";
+
+import { Button, ButtonGroup } from "react-bootstrap";
 import googleIcon from '../../images/google.png'
-// import useFirebase from "../../hooks/useFirebase";
 import { useHistory, useLocation } from "react-router";
 import useAuth from '../../hooks/useAuth';
 
-
-// const schema = yup.object({
-//     firstName: yup.string().required(),
-//     age: yup.number().positive().integer().required(),
-// }).required();
-
 const Register = () => {
     const { register, handleSubmit, reset } = useForm();
-    const { signInUsingGoogle,registerWithEmail } = useAuth();
+    const { signInUsingGoogle,registerWithEmail,user,setUser } = useAuth();
     const location = useLocation();
     const history = useHistory();
     const redirect_uri = location.state?.from || '/home';
@@ -31,7 +21,7 @@ const Register = () => {
             alert('Password did not matched')
             return
         }
-        registerWithEmail(data.email, data.password)
+        registerWithEmail(data.name, data.email, data.password, history)
     }
     const handleGoogleLogin = () => {
         signInUsingGoogle()
@@ -49,7 +39,7 @@ const Register = () => {
                 </div>
                 <div className="pb-2 mb-3 formAndNav bg-light border">
                     <form onSubmit={handleSubmit(onSubmit)} className="pt-4">     
-                        {/* <input type="text" {...register("name", { required: true })} placeholder="Your Full Name" /> */}
+                        <input type="text" {...register("name", { required: true })} placeholder="Your Full Name" />
                         <input type="email" {...register("email", { required: true })} placeholder="Your Email" />
                         <input type="password" {...register("password")} placeholder="Password" />
                         <input type="password" {...register("password2")} placeholder="Confirm Password" />

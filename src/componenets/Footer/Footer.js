@@ -27,7 +27,7 @@ const Footer = () => {
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link eventKey="disabled" disabled>
-                        ©2021 EXTOUR
+                        ©2021 Dorkar Watch
                     </Nav.Link>
                 </Nav.Item>
             </Nav>
@@ -41,7 +41,7 @@ const Footer = () => {
                 <li>{down}</li>
             </ul>
 
-            <p>EXTOUR is part of Dorkar Ltd., the world leader in online travel & related services.</p>
+            <p>Dorkar Watch is part of Dorkar Ltd., the world leader in online Watch selling, services.</p>
         </div>
     );
 };

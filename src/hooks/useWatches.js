@@ -4,7 +4,7 @@ const axios = require('axios');
 const useWatches = () => {
     const [watches, setwatches] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/watches')
+        fetch('https://young-ocean-72177.herokuapp.com/watches')
             .then(res => res.json())
             .then(data => setwatches(data));
     }, []);

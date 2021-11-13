@@ -10,7 +10,7 @@ import axios from 'axios';
 const MySingleorder = ({ order,handleCancel }) => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
-        axios.post('http://localhost:5000/reviews', data)
+        axios.post('https://young-ocean-72177.herokuapp.com/reviews', data)
             .then(res => {
                 if (res.data.insertedId) {
                     alert('Review Successfull');

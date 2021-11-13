@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getAuth, signInWithPopup, GoogleAuthProvider,createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, getIdToken } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider,createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, getIdToken,updateProfile } from "firebase/auth";
 import initializeAuthentication from '../Firebase/firebase.init';
+import axios from 'axios';
 
 initializeAuthentication();
 
@@ -15,13 +16,23 @@ const useFirebase = () => {
     return signInWithPopup(auth, googleProvider)
       .finally(() => { setIsLoading(false) });
   }
-  const registerWithEmail=(email, password)=>{
+  const registerWithEmail=(name,email,password,history)=>{
+    setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    setUser(user);
-  })
+    .then((userCredential) => {
+        const registeredUser = {email, displayName:name};
+        setError('');
+        setUser(registeredUser);
+
+        updateProfile(auth.currentUser, {
+          displayName: name
+        }).then(() => {
+        }).catch((error) => {
+          setError(error.message);
+        });
+        addUserTodatabase(name, email);
+        history.replace('/');
+    })
   .catch((error) => {
     // const errorCode = error.code;
     const errorMessage = error.message;
@@ -64,10 +75,21 @@ const useFirebase = () => {
       setIsLoading(false);
     });
     return () => unsubscribe;
-  }, [])
+  }, []);
+  const addUserTodatabase=(displayName, email)=>{
+    const data = {displayName, email};
+    axios.post('https://young-ocean-72177.herokuapp.com/users', data)
+            .then(res => {
+                if (res.data.insertedId) {
+                    alert('User Added to database successfully');
+                    // reset();
+                }
+            });
+  }
 
   return {
     user,
+    setUser,
     isLoading,
     signInUsingGoogle,
     logOut,

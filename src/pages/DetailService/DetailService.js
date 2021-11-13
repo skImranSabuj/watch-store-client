@@ -8,7 +8,7 @@ const DetailService = () => {
     const [place, setPlace] = useState({});
     const { id } = useParams();
     useEffect(() => {
-        fetch(`http://localhost:5000/watches/${id}`)
+        fetch(`https://young-ocean-72177.herokuapp.com/watches/${id}`)
             .then(res => res.json())
             .then(data => setPlace(data));
     }, []);

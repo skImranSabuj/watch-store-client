@@ -20,6 +20,7 @@ import Contact from './componenets/Contact/Contact';
 import Register from './pages/Register/Register';
 import AllWatches from './pages/AllWatches/AllWatches';
 import Orders from './pages/Orders/Orders';
+import Dashboard from './pages/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -62,6 +63,9 @@ function App() {
             </PrivateRoute>
             <PrivateRoute path="/MyOrders">
               <MyOrders></MyOrders>
+            </PrivateRoute>
+            <PrivateRoute path="/dashboard">
+              <Dashboard></Dashboard>
             </PrivateRoute>
             <Route path="*">
               <NotFound></NotFound>

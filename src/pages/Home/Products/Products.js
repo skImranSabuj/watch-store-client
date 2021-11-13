@@ -9,8 +9,8 @@ const Products = () => {
     // const [places, setPlaces] = useState([]);
     const watches = useWatches();
     return (
-        <div className="container">
-            <h2 className="text-center py-2">Explore Places with Extour!</h2>
+        <div className="container mt-4">
+            <h2 className="text-center py-2">Explore Our Latest Watches!</h2>
             <h4 className="text-center">
                 {
                     watches.length === 0 ? <img src={loading} alt="" className="w-25" /> : ''

@@ -7,7 +7,7 @@ const SingleOrder = ({ order }) => {
     const [status, setStatus] = useState(order.status);
     const [orders, setOrders] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/orders')
+        fetch('https://young-ocean-72177.herokuapp.com/orders')
             .then(res => res.json())
             .then(data => setOrders(data));
     }, []);
@@ -16,7 +16,7 @@ const SingleOrder = ({ order }) => {
       }
     const handleApprove = (id) => {
         setStatus('Approved')
-        fetch(`http://localhost:5000/orders/${id}`, {
+        fetch(`https://young-ocean-72177.herokuapp.com/orders/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -35,7 +35,7 @@ const SingleOrder = ({ order }) => {
     const handleCancel = (id) => {
         const confirmDelete = window.confirm('Are you sure?');
         if (confirmDelete) {
-            const url = `http://localhost:5000/orders/${id}`;
+            const url = `https://young-ocean-72177.herokuapp.com/orders/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

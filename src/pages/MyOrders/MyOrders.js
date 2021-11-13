@@ -15,7 +15,7 @@ const MyOrders = () => {
     console.log(user.email)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders?email=${user.email}`, {
+        fetch(`https://young-ocean-72177.herokuapp.com/orders?email=${user.email}`, {
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('idToken')}`
             }
@@ -36,7 +36,7 @@ const MyOrders = () => {
     const handleCancel = (id) => {
         const confirmDelete = window.confirm('Are you sure?');
         if (confirmDelete) {
-            const url = `http://localhost:5000/orders/${id}`;
+            const url = `https://young-ocean-72177.herokuapp.com/orders/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })
@@ -63,22 +63,7 @@ const MyOrders = () => {
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                         {
-                            // // MyOrders.map(order => <tr>
-                            // orders.map(order => <tr>
-                            //     <td>{order._id}</td>
-                            //     <td>{order.name}</td>
-                            //     <td>{order.phone}</td>
-                            //     <td>{order.email}</td>
-                            //     <td>{order.status}</td>
-                            //     {/* <td>{order.status ? 'Approved' : 'Pending'}</td> */}
-                            //     <td>
-                            //         <button onClick={() => handleCancel(order._id)}>Cencel ordering</button>
-
-                            //     </td>
-                            // </tr>)
-                        } 
+                    <tbody> 
                         {
                             // MyOrders.map(order => <tr>
                             orders.map(order => <MySingleorder

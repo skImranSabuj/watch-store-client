@@ -17,7 +17,7 @@ const Orders = () => {
     const [watch, setWatch] = useState({});
     const { id } = useParams();
     useEffect(() => {
-        fetch(`http://localhost:5000/watches/${id}`)
+        fetch(`https://young-ocean-72177.herokuapp.com/watches/${id}`)
             .then(res => res.json())
             .then(data => setWatch(data));
     }, []);
@@ -48,7 +48,7 @@ const Orders = () => {
         data.Orders = savedCart;
         data.status='Pending';
         console.log('Updated data: ', data)
-        axios.post('http://localhost:5000/orders', data)
+        axios.post('https://young-ocean-72177.herokuapp.com/orders', data)
             .then(res => {
                 if (res.data.insertedId) {
                     alert('Added successfully');
