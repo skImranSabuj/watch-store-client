@@ -10,7 +10,6 @@ const AllOrders = () => {
     const { user } = useAuth();
     const history = useHistory();
     useEffect(() => {
-        // fetch('https://damp-wildwood-05961.herokuapp.com/orderings')
         fetch(`https://young-ocean-72177.herokuapp.com/orders?type=all`)
             .then(res => res.json())
             .then(data => setOrders(data));

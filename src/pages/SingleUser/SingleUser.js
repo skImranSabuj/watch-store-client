@@ -3,25 +3,25 @@ import { useHistory } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 const axios = require('axios');
 
-const SingleOrder = ({ order }) => {
+const SingleUser = ({ user }) => {
     const history = useHistory();
     const { refreshPage } = useAuth();
-    const [status, setStatus] = useState(order.status);
-    const [orders, setOrders] = useState([]);
+    const [status, setStatus] = useState(user.status);
+    const [users, setUsers] = useState([]);
     useEffect(() => {
-        fetch('https://young-ocean-72177.herokuapp.com/orders')
+        fetch('https://young-ocean-72177.herokuapp.com/users')
             .then(res => res.json())
-            .then(data => setOrders(data));
+            .then(data => setUsers(data));
     }, []);
 
     const handleApprove = (id) => {
         setStatus('Approved')
-        fetch(`https://young-ocean-72177.herokuapp.com/orders/${id}`, {
+        fetch(`https://young-ocean-72177.herokuapp.com/users/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(orders)
+            body: JSON.stringify(users)
         })
             .then(res => res.json())
             .then(data => {
@@ -35,7 +35,7 @@ const SingleOrder = ({ order }) => {
     const handleCancel = (id) => {
         const confirmDelete = window.confirm('Are you sure?');
         if (confirmDelete) {
-            const url = `https://young-ocean-72177.herokuapp.com/orders/${id}`;
+            const url = `https://young-ocean-72177.herokuapp.com/users/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })
@@ -49,21 +49,20 @@ const SingleOrder = ({ order }) => {
         }
     }
     return (
-        <tr key={order._id}>
-            <td>{order._id}</td>
-            <td>{order.name}</td>
-            <td>{order.phone}</td>
-            <td>{order.email}</td>
-            <td>{status}</td>
+        <tr key={user._id}>
+            <td>{user._id}</td>
+            <td>{user.displayName}</td>
+            <td>{user.email}</td>
+            <td>{user.role&&'Not Admin'}</td>
             <td>
-                {
-                    status === 'Pending' ? <button onClick={() => handleApprove(order._id)}
+                {/* {
+                    status === 'Pending' ? <button onClick={() => handleApprove(user._id)}
                     > Approve</button> : ''
-                }
-                < button onClick={() => handleCancel(order._id)}>Decline ordering</button>
+                } */}
+                < button onClick={() => handleCancel(user._id)}>Decline usering</button>
             </td>
         </tr>
     );
 };
 
-export default SingleOrder;
+export default SingleUser;

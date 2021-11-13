@@ -106,6 +106,9 @@ const useFirebase = () => {
     })
         .then()
 }
+const refreshPage=()=> {
+  window.location.reload(false);
+}
 
   return {
     user,
@@ -115,7 +118,8 @@ const useFirebase = () => {
     logOut,
     registerWithEmail,
     logInUser,
-    addUserTodatabase
+    addUserTodatabase,
+    refreshPage
   }
 }
 

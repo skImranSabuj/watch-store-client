@@ -21,6 +21,8 @@ import Register from './pages/Register/Register';
 import AllWatches from './pages/AllWatches/AllWatches';
 import Orders from './pages/Orders/Orders';
 import Dashboard from './pages/Dashboard/Dashboard';
+import Payment from './pages/Payment/Payment';
+import MakeAdmin from './pages/MakeAdmin/MakeAdmin';
 
 function App() {
   return (
@@ -64,8 +66,14 @@ function App() {
             <PrivateRoute path="/MyOrders">
               <MyOrders></MyOrders>
             </PrivateRoute>
+            <PrivateRoute path="/makeAdmin">
+              <MakeAdmin></MakeAdmin>
+            </PrivateRoute>
             <PrivateRoute path="/dashboard">
               <Dashboard></Dashboard>
+            </PrivateRoute>
+            <PrivateRoute path="/payment">
+              <Payment></Payment>
             </PrivateRoute>
             <Route path="*">
               <NotFound></NotFound>
