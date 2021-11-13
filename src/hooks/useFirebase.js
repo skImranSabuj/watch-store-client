@@ -12,9 +12,18 @@ const useFirebase = () => {
   const auth = getAuth();
   const googleProvider = new GoogleAuthProvider();
 
-  const signInUsingGoogle = () => {
-    return signInWithPopup(auth, googleProvider)
-      .finally(() => { setIsLoading(false) });
+  const signInUsingGoogle = (location,history) => {
+    setIsLoading(true);
+        signInWithPopup(auth, googleProvider)
+            .then((result) => {
+                const user = result.user;
+                addUserTodatabase(user.displayName,user.email, 'PUT');
+                setError('');
+                const destination = location?.state?.from || '/';
+                history.replace(destination);
+            }).catch((error) => {
+                setError(error.message);
+            }).finally(() => setIsLoading(false));
   }
   const registerWithEmail=(name,email,password,history)=>{
     setIsLoading(true);
@@ -30,7 +39,7 @@ const useFirebase = () => {
         }).catch((error) => {
           setError(error.message);
         });
-        addUserTodatabase(name, email);
+        addUserTodatabase(name, email, 'POST');
         history.replace('/');
     })
   .catch((error) => {
@@ -76,16 +85,27 @@ const useFirebase = () => {
     });
     return () => unsubscribe;
   }, []);
-  const addUserTodatabase=(displayName, email)=>{
-    const data = {displayName, email};
-    axios.post('https://young-ocean-72177.herokuapp.com/users', data)
-            .then(res => {
-                if (res.data.insertedId) {
-                    alert('User Added to database successfully');
-                    // reset();
-                }
-            });
-  }
+  // const addUserTodatabase=(displayName, email)=>{
+  //   const data = {displayName, email};
+  //   axios.post('https://young-ocean-72177.herokuapp.com/users', data)
+  //           .then(res => {
+  //               if (res.data.insertedId) {
+  //                   alert('User Added to database successfully');
+  //                   // reset();
+  //               }
+  //           });
+  // }
+  const addUserTodatabase = (displayName,email, method) => {
+    const user = { displayName,email };
+    fetch('https://young-ocean-72177.herokuapp.com/users', {
+        method: method,
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+        .then()
+}
 
   return {
     user,
@@ -94,7 +114,8 @@ const useFirebase = () => {
     signInUsingGoogle,
     logOut,
     registerWithEmail,
-    logInUser
+    logInUser,
+    addUserTodatabase
   }
 }
 

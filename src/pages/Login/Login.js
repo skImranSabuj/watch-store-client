@@ -7,6 +7,7 @@ import googleIcon from '../../images/google.png'
 import useFirebase from "../../hooks/useFirebase";
 import { useHistory, useLocation } from "react-router";
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 // const schema = yup.object({
 //     firstName: yup.string().required(),
@@ -15,18 +16,15 @@ import { Link, NavLink } from "react-router-dom";
 
 const Login = () => {
     const { register, handleSubmit, reset } = useForm();
-    const { signInUsingGoogle } = useFirebase();
+    const { signInUsingGoogle,addUserTodatabase } = useAuth();
     const location = useLocation();
     const history = useHistory();
     const redirect_uri = location.state?.from || '/home';
     const onSubmit = data => {
         // if(data.password!==data.password1)
     }
-    const handleGoogleLogin = () => {
-        signInUsingGoogle()
-            .then(result => {
-                history.push(redirect_uri);
-            })
+    const handleGoogleSignIn = () => {
+        signInUsingGoogle(location, history)
     }
     // const
     return (
@@ -53,7 +51,7 @@ const Login = () => {
                     <Button variant="secondary">
                         <img src={googleIcon} alt="" />
                     </Button>
-                    <Button variant="outline-secondary" onClick={handleGoogleLogin}>Log in with Google </Button>
+                    <Button variant="outline-secondary" onClick={handleGoogleSignIn}>Log in with Google </Button>
                 </ButtonGroup>
             </div>
                 
