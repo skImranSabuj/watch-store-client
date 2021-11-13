@@ -1,0 +1,11 @@
+.footer-icons{
+    display: flex;
+    justify-content: center;
+    
+}
+.footer-icons li{
+text-decoration: none;
+margin: 10px;
+font-size: 28px;
+list-style: none;
+}

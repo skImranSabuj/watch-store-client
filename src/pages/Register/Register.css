@@ -1,0 +1,31 @@
+.add-service form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.add-service form input,
+textarea {
+  width: 40%;
+  margin-bottom: 10px;
+}
+.others {
+  display: flex;
+}
+.register-header{
+  background-color:#5C636A;
+}
+.reg-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 0 10px 0;
+
+}
+.formAndNav{
+  margin-top: -50px;
+  width: 50%;
+  border-radius: 15px;
+}

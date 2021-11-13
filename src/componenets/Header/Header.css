@@ -1,0 +1,28 @@
+.nav-bar{
+    background-color: #C4B8B8
+}
+.btn-menual{
+    background-color: #00afefb9;
+    padding: 3px 20px;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid transparent;
+}
+.btn-menual:hover{
+    background-color: #00afef;
+    /* color: white; */
+    border: 1px solid rgb(17, 43, 53);
+    box-shadow: 2px;
+
+}
+.user-logo{
+    width: 20px;
+
+}
+.user-dropdown, .logout{
+    color: black
+}
+#dropdown-button-dark-example2{
+    border-radius: 15px;;
+}
